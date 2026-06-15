@@ -6414,16 +6414,16 @@ class Station extends tiny_typed_emitter_1.TypedEmitter {
                 channel: device.getChannel(),
             }, {
                 property: propertyData,
-                onSuccess: () => {
-                    this.api.setParameters(this.getSerial(), device.getSerial(), [
-                        {
-                            paramType: types_2.CommandType.CMD_INDOOR_ENABLE_PRIVACY_MODE_S350,
-                            paramValue: param_value,
-                        },
-                    ]).catch((error) => {
-                        logging_1.rootHTTPLogger.error(`Station enable device - cloud sync failed for outdoor PT camera`, { stationSN: this.getSerial(), deviceSN: device.getSerial(), error });
-                    });
+            });
+            // Sync enabled state to Eufy cloud immediately (do not wait for P2P onSuccess
+            // which may never fire for HB3-connected outdoor PT cameras).
+            this.api.setParameters(this.getSerial(), device.getSerial(), [
+                {
+                    paramType: types_2.CommandType.CMD_INDOOR_ENABLE_PRIVACY_MODE_S350,
+                    paramValue: param_value,
                 },
+            ]).catch((error) => {
+                logging_1.rootHTTPLogger.error(`Station enable device - cloud sync failed for outdoor PT camera`, { stationSN: this.getSerial(), deviceSN: device.getSerial(), error });
             });
         }
         else {
