@@ -7465,6 +7465,19 @@ export class Station extends TypedEmitter<StationEvents> {
         },
         {
           property: propertyData,
+          onSuccess: () => {
+            this.api.setParameters(this.getSerial(), device.getSerial(), [
+              {
+                paramType: CommandType.CMD_INDOOR_ENABLE_PRIVACY_MODE_S350,
+                paramValue: param_value,
+              },
+            ]).catch((error) => {
+              rootHTTPLogger.error(
+                `Station enable device - cloud sync failed for outdoor PT camera`,
+                { stationSN: this.getSerial(), deviceSN: device.getSerial(), error }
+              );
+            });
+          },
         }
       );
     } else {

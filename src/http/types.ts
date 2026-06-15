@@ -7131,7 +7131,7 @@ export const DeviceProperties: Properties = {
     ...GenericDeviceProperties,
     [PropertyName.DeviceWifiRSSI]: DeviceWifiRSSIProperty,
     [PropertyName.DeviceWifiSignalLevel]: DeviceWifiSignalLevelProperty,
-    [PropertyName.DeviceEnabled]: DeviceEnabledSoloProperty,
+    [PropertyName.DeviceEnabled]: DeviceEnabledIndoorS350Property,
     [PropertyName.DeviceBattery]: DeviceBatteryProperty,
     [PropertyName.DeviceBatteryTemp]: DeviceBatteryTempProperty,
     [PropertyName.DeviceNightvision]: DeviceNightvisionProperty,
