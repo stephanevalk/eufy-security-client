@@ -7472,7 +7472,7 @@ export class Station extends TypedEmitter<StationEvents> {
       this.api.setParameters(this.getSerial(), device.getSerial(), [
         {
           paramType: CommandType.CMD_INDOOR_ENABLE_PRIVACY_MODE_S350,
-          paramValue: param_value,
+          paramValue: String(param_value),
         },
       ]).catch((error) => {
         rootHTTPLogger.error(
