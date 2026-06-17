@@ -6419,7 +6419,10 @@ class Station extends tiny_typed_emitter_1.TypedEmitter {
             // which may never fire for HB3-connected outdoor PT cameras).
             this.api.setParameters(this.getSerial(), device.getSerial(), [
                 {
-                    paramType: types_2.CommandType.CMD_INDOOR_ENABLE_PRIVACY_MODE_S350,
+                    // param_type 6254 is the cloud-side enabled/privacy state read by the
+                    // Eufy mobile app. The HB3 auto-updates 6250 after P2P but never
+                    // writes 6254 - that must be done explicitly via HTTP API.
+                    paramType: 6254,
                     paramValue: String(param_value),
                 },
             ]).catch((error) => {
