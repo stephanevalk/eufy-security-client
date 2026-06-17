@@ -7471,11 +7471,13 @@ export class Station extends TypedEmitter<StationEvents> {
       // which may never fire for HB3-connected outdoor PT cameras).
       this.api.setParameters(this.getSerial(), device.getSerial(), [
         {
-          // param_type 6254 is the cloud-side enabled/privacy state read by the
-          // Eufy mobile app. The HB3 auto-updates 6250 after P2P but never
-          // writes 6254 — that must be done explicitly via HTTP API.
-          paramType: 6254,
-          paramValue: String(value ? 1 : 0),
+          // param_type 1035 (CMD_DEVS_SWITCH) is the cloud-side on/off state the
+          // Eufy mobile app actually reads and writes. The wrapped privacy-mode
+          // P2P command (6250) physically toggles the cam but the HB3 no longer
+          // writes 1035, so the app's enabled state goes stale. Write it
+          // explicitly here using the same encoding (0 = enabled, 1 = disabled).
+          paramType: CommandType.CMD_DEVS_SWITCH,
+          paramValue: String(param_value),
         },
       ]).catch((error) => {
         rootHTTPLogger.error(

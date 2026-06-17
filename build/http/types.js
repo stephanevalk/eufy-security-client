@@ -6620,7 +6620,10 @@ exports.DeviceProperties = {
         ...exports.GenericDeviceProperties,
         [PropertyName.DeviceWifiRSSI]: exports.DeviceWifiRSSIProperty,
         [PropertyName.DeviceWifiSignalLevel]: exports.DeviceWifiSignalLevelProperty,
-        [PropertyName.DeviceEnabled]: exports.DeviceEnabledIndoorS350Property,
+        // S340 exposes its on/off state via the legacy CMD_DEVS_SWITCH (1035) param,
+        // which is what the Eufy mobile app reads and writes. (The S4/T8172 uses the
+        // wrapped 6250 privacy param instead.)
+        [PropertyName.DeviceEnabled]: exports.DeviceEnabledSoloProperty,
         [PropertyName.DeviceBattery]: exports.DeviceBatteryProperty,
         [PropertyName.DeviceBatteryTemp]: exports.DeviceBatteryTempProperty,
         [PropertyName.DeviceNightvision]: exports.DeviceNightvisionProperty,
