@@ -7475,7 +7475,7 @@ export class Station extends TypedEmitter<StationEvents> {
           // Eufy mobile app. The HB3 auto-updates 6250 after P2P but never
           // writes 6254 — that must be done explicitly via HTTP API.
           paramType: 6254,
-          paramValue: String(param_value),
+          paramValue: String(value ? 1 : 0),
         },
       ]).catch((error) => {
         rootHTTPLogger.error(

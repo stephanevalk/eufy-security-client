@@ -6423,7 +6423,7 @@ class Station extends tiny_typed_emitter_1.TypedEmitter {
                     // Eufy mobile app. The HB3 auto-updates 6250 after P2P but never
                     // writes 6254 - that must be done explicitly via HTTP API.
                     paramType: 6254,
-                    paramValue: String(param_value),
+                    paramValue: String(value ? 1 : 0),
                 },
             ]).catch((error) => {
                 logging_1.rootHTTPLogger.error(`Station enable device - cloud sync failed for outdoor PT camera`, { stationSN: this.getSerial(), deviceSN: device.getSerial(), error });
